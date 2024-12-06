@@ -39,7 +39,6 @@ api-key-rotation/
 1. [.NET SDK 8.0](https://dotnet.microsoft.com/download)
 2. [Docker Desktop](https://www.docker.com/products/docker-desktop)
 3. HashiCorp Vault Docker image (Dev Mode)
-4. Basic understanding of .NET and Vault
 
 ## Setting Up the Project
 
@@ -55,16 +54,18 @@ Navigate to the root of the solution and run:
 $ dotnet restore
 ```
 
-### 3. Set Up Docker and Vault
+### 3. Install Docker Desktop
+Download and install Docker Desktop from [Docker Desktop](https://www.docker.com/products/docker-desktop). Ensure it is running.
+
+### 4. Set Up HashiCorp Vault
 Run the Vault server in Dev mode using Docker:
 
 ```bash
+$ docker pull hashicorp/vault
 $ docker run --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=<VAULT_DEV_ROOT_TOKEN>' -p 8200:8200 vault
 ```
 
-The output will display:
-- `Unseal Key`
-- `Root Token`
+After running this command, note the `Unseal Key` and `Root Token` displayed in the output. 
 
 Set the Vault address:
 ```bash
@@ -72,17 +73,17 @@ $ export VAULT_ADDR='http://127.0.0.1:8200'
 ```
 
 ### Example Output
-Upon running the Vault server in dev mode, you might see something like this:
+When the Vault server starts in dev mode, you might see something like this:
 
 ```plaintext
 Vault server started! Log data will stream in below:
-Unseal Key: <YOUR UNSEAL KEY GOES HERE>
-Root Token: <YOUR ROOT TOKEN GOES HERE>
+Unseal Key: <YOUR UNSEAL KEY>
+Root Token: <YOUR ROOT TOKEN>
 Development mode should NOT be used in production installations!
 ```
 
-### 4. Configure Vault
-Run these commands to configure Vault for the project:
+### 5. Configure Vault
+Log in to Vault using the root token and configure it to store secrets:
 
 ```bash
 $ vault login <VAULT_DEV_ROOT_TOKEN>
@@ -90,14 +91,14 @@ $ vault secrets enable -path=secret kv
 $ vault kv put secret/example-key-id value=initial-api-key
 ```
 
-### 5. Build the Project
+### 6. Build the Project
 Navigate to the main project directory:
 ```bash
 $ cd src/ApiKeyRotation
 $ dotnet build
 ```
 
-### 6. Run the Project
+### 7. Run the Project
 To execute the key rotation logic:
 ```bash
 $ dotnet run
@@ -110,8 +111,8 @@ info: ApiKeyRotation.Services.VaultService[0]
 New API Key: <randomly-generated-key>
 ```
 
-### 7. Running Tests
-Navigate to the test directory:
+### 8. Run Tests
+To validate the implementation, navigate to the test directory and run the tests:
 ```bash
 $ cd src/tests/ApiKeyRotation.Tests
 $ dotnet test
@@ -149,33 +150,21 @@ The entry point of the application. It initializes the application configuration
 - **`VaultServiceTests.cs`**: Contains unit tests for the `VaultService` class to ensure its methods work as expected.
 - **`ApiKeyRotation.Tests.csproj`**: Manages dependencies for the test project and links it to the main application.
 
-## Using Docker Desktop for Vault
+## Notes for Beginners
 
-### Steps to Run Vault in Docker Dev Mode
-1. Open Docker Desktop.
-2. Pull the Vault image:
-   ```bash
-   $ docker pull hashicorp/vault
-   ```
-3. Run the container with Dev mode enabled:
-   ```bash
-   $ docker run --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=<VAULT_DEV_ROOT_TOKEN>' -p 8200:8200 vault
-   ```
-4. Use the displayed `Unseal Key` and `Root Token` to access Vault.
+1. **Installing .NET SDK**
+   - Visit the [.NET SDK download page](https://dotnet.microsoft.com/download) and download the installer for your operating system.
+   - After installation, verify it by running:
+     ```bash
+     dotnet --version
+     ```
 
-### Example Output
-```plaintext
-Vault server started! Log data will stream in below:
-Unseal Key: <UNSEAL_KEY>
-Root Token: <VAULT_DEV_ROOT_TOKEN>
-Development mode should NOT be used in production installations!
-```
+2. **Installing Docker Desktop**
+   - Follow the [Docker Desktop installation guide](https://docs.docker.com/desktop/).
+   - Ensure it is running before proceeding with Vault setup.
 
-Use this information to configure your environment:
-
-```bash
-$ export VAULT_ADDR='http://127.0.0.1:8200'
-```
+3. **Running Commands**
+   - Open a terminal or command prompt, and ensure you navigate to the correct directory as specified in the instructions.
 
 ## Instructions and Guides
 
