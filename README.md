@@ -92,31 +92,32 @@ Run the Vault server in Dev mode using Docker:
 First, pull the official Vault image:
 
 ```bash
-$ docker pull hashicorp/vault
+docker pull hashicorp/vault
 ```
 
 Then, start the Vault server in Dev mode using the following command:
 
 ```bash
-$ docker run --cap-add=IPC_LOCK -p 8200:8200 hashicorp/vault
+docker run --cap-add=IPC_LOCK -p 8200:8200 hashicorp/vault
 ```
-
-\$ docker run --cap-add=IPC\_LOCK -e 'VAULT\_DEV\_ROOT\_TOKEN\_ID=\<VAULT\_DEV\_ROOT\_TOKEN>' -p 8200:8200 hashicorp/vault
-
-````
-
 After running this command, Vault will display an `Unseal Key` and a `Root Token` in the logs. These are used to access and manage the Vault instance. 
 
-Set the Vault address for the CLI to communicate with the Vault server:
+
+### Setting Environment Variables
+
+Set the Vault Address: Use this command to ensure the application knows where to find the Vault server:
+
 ```bash
-$
-````
-
+export VAULT_ADDR='http://127.0.0.1:8200'
 ```
+Set the Vault Token: Use the root token displayed when starting Vault in dev mode:
+
+```bash
+export VAULT_TOKEN='your-root-token'
 ```
+Replace your-root-token with the actual token value 
 
-If you need to retrieve the Root Token later, use the following command to view the container logs:
-
+Retrieve the Root Token (if needed): If you need to retrieve the root token, check the Vault container logs:
 ```bash
 docker ps
 # Note the container ID for Vault
