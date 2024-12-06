@@ -53,6 +53,15 @@ Navigate to the root of the solution and run:
 ```bash
 $ dotnet restore
 ```
+> **Note:** If you encounter issues restoring dependencies, ensure you have access to all required NuGet package sources. Run the following command to list your NuGet sources:
+```bash
+$ dotnet nuget list source
+```
+If a source like `https://pkgs.dev.azure.com` is inaccessible, remove it:
+```bash
+$ dotnet nuget remove source <source-name>
+```
+Then retry restoring dependencies.
 
 ### 3. Install Docker Desktop
 Download and install Docker Desktop from [Docker Desktop](https://www.docker.com/products/docker-desktop). Ensure it is running.
