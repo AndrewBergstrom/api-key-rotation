@@ -36,6 +36,11 @@ api-key-rotation/
 
 ## Prerequisites
 
+1. Install the Vault CLI: Visit the [Vault Installation Guide](https://developer.hashicorp.com/vault/downloads) and download the appropriate version for your operating system. After installation, verify it is accessible by running:
+   ```bash
+   vault --version
+   ```
+
 1. [.NET SDK 8.0](https://dotnet.microsoft.com/download)
 2. [Docker Desktop](https://www.docker.com/products/docker-desktop)
 3. HashiCorp Vault Docker image (Dev Mode)
@@ -71,7 +76,7 @@ Run the Vault server in Dev mode using Docker:
 
 ```bash
 $ docker pull hashicorp/vault
-$ docker run --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=<VAULT_DEV_ROOT_TOKEN>' -p 8200:8200 vault
+$ docker run --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=<VAULT_DEV_ROOT_TOKEN>' -p 8200:8200 hashicorp/vault
 ```
 
 After running this command, note the `Unseal Key` and `Root Token` displayed in the output. 
