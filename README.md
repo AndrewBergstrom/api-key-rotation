@@ -12,26 +12,25 @@ This project demonstrates a secure and automated way to rotate API keys for a gi
 ## Directory Structure
 
 ```plaintext
-api-key-rotation-demo/
-├── cleaned-repo-working/
-│   ├── src/
-│   │   ├── ApiKeyRotation/
-│   │   │   ├── ApiKeyRotation.csproj
-│   │   │   ├── Program.cs
-│   │   │   ├── Config/
-│   │   │   │   └── AppSettings.json
-│   │   │   ├── Models/
-│   │   │   │   └── ApiKey.cs
-│   │   │   ├── Services/
-│   │   │   │   ├── VaultService.cs
-│   │   │   │   └── Services.csproj
-│   │   └── tests/
-│   │       └── ApiKeyRotation.Tests/
-│   │           ├── ApiKeyRotation.Tests.csproj
-│   │           ├── Usings.cs
-│   │           └── VaultServiceTests.cs
+api-key-rotation/
+├── src/
+│   ├── ApiKeyRotation/
+│   │   ├── ApiKeyRotation.csproj
+│   │   ├── Program.cs
+│   │   ├── Config/
+│   │   │   └── AppSettings.json
+│   │   ├── Models/
+│   │   │   └── ApiKey.cs
+│   │   ├── Services/
+│   │   │   ├── VaultService.cs
+│   │   │   └── Services.csproj
+│   └── tests/
+│       └── ApiKeyRotation.Tests/
+│           ├── ApiKeyRotation.Tests.csproj
+│           ├── Usings.cs
+│           └── VaultServiceTests.cs
 ├── .gitignore
-├── api-key-rotation-demo.sln
+├── api-key-rotation.sln
 ├── README.md
 ```
 
@@ -46,8 +45,8 @@ api-key-rotation-demo/
 
 ### 1. Clone the Repository
 ```bash
-$ git clone https://github.com/AndrewBergstrom/api-key-rotation-demo.git
-$ cd api-key-rotation-demo
+$ git clone https://github.com/AndrewBergstrom/api-key-rotation.git
+$ cd api-key-rotation
 ```
 
 ### 2. Restore Dependencies
@@ -92,9 +91,9 @@ $ vault kv put secret/example-key-id value=initial-api-key
 ```
 
 ### 5. Build the Project
-Navigate to the `cleaned-repo-working/src/ApiKeyRotation` directory:
+Navigate to the main project directory:
 ```bash
-$ cd cleaned-repo-working/src/ApiKeyRotation
+$ cd src/ApiKeyRotation
 $ dotnet build
 ```
 
@@ -114,7 +113,7 @@ New API Key: <randomly-generated-key>
 ### 7. Running Tests
 Navigate to the test directory:
 ```bash
-$ cd cleaned-repo-working/src/ApiKeyRotation/tests/ApiKeyRotation.Tests
+$ cd src/tests/ApiKeyRotation.Tests
 $ dotnet test
 ```
 
