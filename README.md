@@ -55,8 +55,8 @@ api-key-rotation/
 ### 1. Clone the Repository
 
 ```bash
-$ git clone https://github.com/AndrewBergstrom/api-key-rotation.git
-$ cd api-key-rotation
+git clone https://github.com/AndrewBergstrom/api-key-rotation.git
+cd api-key-rotation
 ```
 
 ### 2. Restore Dependencies
@@ -64,19 +64,19 @@ $ cd api-key-rotation
 Navigate to the root of the solution and run:
 
 ```bash
-$ dotnet restore
+dotnet restore
 ```
 
 > **Note:** If you encounter issues restoring dependencies, ensure you have access to all required NuGet package sources. Run the following command to list your NuGet sources:
 
 ```bash
-$ dotnet nuget list source
+dotnet nuget list source
 ```
 
 If a source like `https://pkgs.dev.azure.com` is inaccessible, remove it:
 
 ```bash
-$ dotnet nuget remove source <source-name>
+dotnet nuget remove source <source-name>
 ```
 
 Then retry restoring dependencies.
